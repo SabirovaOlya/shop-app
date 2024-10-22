@@ -1,9 +1,18 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, MouseEvent, Fragment } from 'react';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import MenuIcon from '@mui/icons-material/Menu';
-import PersonIcon from '@mui/icons-material/Person';
-// import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import { menuPaper } from '../../utils/header-menu-settings';
 import './style.scss'
 
 
@@ -15,6 +24,14 @@ interface Props {
 const Header: React.FC<Props> = ({ onSidebarToggle, isSidebarMini }) => {
     const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
     const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     useEffect(() => {
         const handleWindowResize = () => {
@@ -44,7 +61,7 @@ const Header: React.FC<Props> = ({ onSidebarToggle, isSidebarMini }) => {
 
 
     return (
-        <React.Fragment>
+        <Fragment>
             <header className={isSidebarMini ? 'mini_header' : ''}>
                 {
                     windowWidth < 992 && (
@@ -58,36 +75,54 @@ const Header: React.FC<Props> = ({ onSidebarToggle, isSidebarMini }) => {
                         <button className='text-sm'> {isFullScreen ? <CloseFullscreenIcon className='text-sm' /> : <OpenInNewIcon className='text-sm' />} </button>
                     </div>
                 </div>
-                {/* <Dropdown placement="bottom-end">
-                    <DropdownTrigger>
-                        <Avatar
-                            isBordered
-                            as="button"
-                            className="transition-transform"
-                            color="primary"
-                            name="Jason Hughes"
-                            size="sm"
-                            fallback={
-                                <PersonIcon />
-                            }
-                        />
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label="Profile Actions">
-                        <DropdownItem key="settings">My Settings</DropdownItem>
-                        <DropdownItem key="system">System</DropdownItem>
-                        <DropdownItem key="logout" color="danger" onClick={
-                            () => {
-                                window.localStorage.removeItem('token')
-                                window.location.reload(false);
-                                window.location.pathname = '/';
-                            }
-                        }>
-                            Log Out
-                        </DropdownItem>
-                    </DropdownMenu>
-                </Dropdown> */}
+                <Tooltip title="Account settings">
+                    <IconButton
+                        onClick={handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                    >
+                        <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                    </IconButton>
+                </Tooltip>
+                <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    slotProps={{
+                        paper: menuPaper
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                >
+                    <MenuItem onClick={handleClose}><Avatar /> Profile</MenuItem>
+                    <MenuItem onClick={handleClose}><Avatar /> My account</MenuItem>
+                    <Divider />
+                    <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <PersonAdd fontSize="small" />
+                        </ListItemIcon>
+                        Add another account
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <Settings fontSize="small" />
+                        </ListItemIcon>
+                        Settings
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <Logout fontSize="small" />
+                        </ListItemIcon>
+                        Logout
+                    </MenuItem>
+                </Menu>
             </header>
-        </React.Fragment>
+        </Fragment>
     )
 }
 
