@@ -150,7 +150,7 @@ export default function ProductList() {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[8, 10, 25]}
+                    rowsPerPageOptions={[8]}
                     component="div"
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
