@@ -1,5 +1,6 @@
 import StatisticsRouting from "../pages/statistics/routing"
 import FeedbacksRouting from "../pages/feedbacks/routing"
+import ProductsRouting from "../pages/products"
 
 interface RouteType {
     path: string
@@ -16,8 +17,8 @@ export const routes: RouteType[] = [
         path: '/feedbacks/*',
         element: <FeedbacksRouting />
     },
-    // {
-    //     path: '/products/*',
-    //     element: 
-    // },
+    {
+        path: '/products/*',
+        element: <ProductsRouting />
+    },
 ]

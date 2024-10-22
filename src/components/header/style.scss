@@ -133,17 +133,17 @@ header {
         visibility: visible;
         opacity: 1;
     }
+
+    .full_screen_icon {
+        display: none;
+        visibility: hidden;
+    }
 }
 
 @media (max-width: 720px){
     .mobile_menu img {
         width: 30px;
         height: 30px;
-    }
-
-    .full_screen_icon {
-        display: none;
-        visibility: hidden;
     }
 }
   

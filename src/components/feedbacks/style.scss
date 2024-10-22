@@ -1,0 +1,122 @@
+.feedback_form{
+    margin-top: 40px;
+    border-top: 2px dashed blue;
+    padding: 20px 0;
+
+    p{
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .feedback_form_boxs{
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        
+        button{
+            width: 150px;
+            height: 50px;
+            outline: none;
+            border: none;
+            background-color: none;
+            font-weight: 600;
+            font-size: 12px;
+            transition-duration: 0.3s;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .btn_icon{
+                margin-right: 5px;
+                font-size: 20px;
+                transition: transform 0.3s;
+            }
+        }
+        button:hover .btn_icon{
+            animation: sway_icon 0.2s ease-in-out infinite alternate;
+        }
+        .negative{
+            background-color: rgb(248, 186, 186);
+
+            .btn_icon{
+                color: rgb(255, 81, 0);
+            }
+        }
+        .positive{
+            background-color: rgb(198, 235, 198);
+
+            .btn_icon{
+                color:rgb(22, 173, 29);
+            }
+        }
+        .no_active{
+            background-color: rgb(176, 176, 176);
+
+            .btn_icon{
+                color:grey;
+            }
+        }
+
+        @keyframes sway_icon {
+            0% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(-10deg);
+            }
+        }
+    }
+
+    .submit_button{
+        margin-left: auto;
+        margin-top: 20px;
+        width: 200px;
+        height: 50px;
+        outline: none;
+        border: none;
+        background-color: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 5px;
+        transition-duration: 0.3s;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(198, 235, 198);
+        border: 2px solid green;
+        .btn_icon{
+            margin-left: 5px;
+            font-size: 18px;
+            color: green;
+            transition: transform 0.3s;
+        }
+    }
+    .submit_button:hover{
+        transform: scale(1.1);
+    }
+
+    .submit_button:hover .btn_icon {
+        animation: sway 0.5s infinite alternate;
+    }
+    
+    @keyframes sway {
+        0% {
+            transform: translateX(-5px);
+        }
+        100% {
+            transform: translateX(5px);
+        }
+    }
+}
+
+.green_border{
+    border: 1px solid green;
+}
+.red_border{
+    border: 1px solid red;
+}
