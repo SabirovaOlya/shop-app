@@ -1,12 +1,9 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 
 
-export const https: AxiosInstance = axios.create({
+export const https: any = axios.create({
     baseURL: `${import.meta.env.VITE_REACT_APP_BASE_URL}/api`,
     headers: {
         'Accept': 'application/json;charset=utf-8',
     }
 });
-
-
-export default https;

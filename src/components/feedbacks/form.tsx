@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import https from '../../services/https';
+import { https } from '../../services/https';
 import { alert } from '../alert/alert';
 import './style.scss'
 
@@ -17,7 +17,7 @@ function FeedbackForm() {
 
     const handleSubmit = async () => {
         if (text?.trim()?.length === 0 || typeof (text) !== 'string') {
-            return alert('Matn kiriting', 'error')
+            return alert('Enter the text...', 'error')
         }
 
         const data = {
@@ -29,6 +29,9 @@ function FeedbackForm() {
         try {
             await https.post('/feedbacks/', data)
             alert('Feedback successfully was sent', 'success')
+            setText('')
+            setStatus(true)
+            setRating(5)
         }
         catch (err) {
             alert('Error', 'error')
