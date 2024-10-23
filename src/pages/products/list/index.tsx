@@ -45,7 +45,6 @@ export default function ProductList() {
         const fetchProducts = async (page: number) => {
             try {
                 const res = await https.get(`/products?page=${page + 1}`);
-                console.log(res.data);
                 setRows(res.data.results);
                 setTotalCount(res.data.count);
                 setLoading(false);
